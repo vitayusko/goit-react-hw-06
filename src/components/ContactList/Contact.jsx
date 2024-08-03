@@ -2,7 +2,9 @@ import React from "react";
 import { FaUser, FaPhoneAlt } from "react-icons/fa";
 import s from "./ContactList.module.css";
 
-const Contact = ({ handleDeleteContact, id, name, number }) => {
+const Contact = () => {
+    const dispatch = useDispatch();
+
   return (
     <div className={s.wrapper}>
       <div className={s.wrapperText}>
@@ -13,7 +15,7 @@ const Contact = ({ handleDeleteContact, id, name, number }) => {
           <FaPhoneAlt /> {number}
         </span>
       </div>
-      <button onClick={() => handleDeleteContact(id)} className={s.btn}>
+      <button className={s.btn} onClick={()=>dispatch{item.id}}>
         Delete
       </button>
     </div>

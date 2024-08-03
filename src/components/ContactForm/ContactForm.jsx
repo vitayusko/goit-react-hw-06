@@ -16,18 +16,18 @@ const registerSchema = Yup.object({
     .max(15, "Number must be at most 15 digits"),
 });
 
-const ContactForm = ({ onAddContact }) => {
-  const initialValues = {
-    name: "",
-    number: "",
-  };
+// const ContactForm = ({ onAddContact }) => {
+//   const initialValues = {
+//     name: "",
+//     number: "",
+//   };
 
-  const handleSubmit = (values, actions) => {
-    const newContact = { ...values, id: nanoid() };
-    console.log(newContact);
-    onAddContact(newContact);
-    actions.resetForm();
-  };
+//   const handleSubmit = (values, actions) => {
+//     const newContact = { ...values, id: nanoid() };
+//     console.log(newContact);
+//     onAddContact(newContact);
+//     actions.resetForm();
+//   };
 
   return (
     <div className={s.wrapper}>

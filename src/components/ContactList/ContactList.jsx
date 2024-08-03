@@ -1,8 +1,12 @@
 import React from "react";
 import Contact from "./Contact";
 import s from "./ContactList.module.css";
+import { useDispatch, useSelector } from "react-redux";
+import { selectorContacts } from "../../redux/contact/selector";
 
-const ContactList = ({ contacts, handleDeleteContact }) => {
+const ContactList = () => {
+  const contacts = useSelector(selectorContacts);
+  // const dispatch = useDispatch();
   return (
     <div className={s.contactList}>
       {contacts.map((item) => (
