@@ -1,41 +1,29 @@
 import React from "react";
 import s from "./ContactForm.module.css";
-import * as Yup from "yup";
 import { Formik, Form, Field, ErrorMessage } from "formik";
-import { nanoid } from "nanoid";
+import { useDispatch } from "react-redux";
+import { nanoid } from "@reduxjs/toolkit";
+import { addContact } from "../../redux/contact/contactsSlice";
 
-const registerSchema = Yup.object({
-  name: Yup.string()
-    .required("This field is required")
-    .min(3, "Name must be at least 3 characters")
-    .max(30, "Name must be at most 30 characters"),
-  number: Yup.string()
-    .required("This field is required")
-    .matches(/^[0-9]+$/, "Number must contain only digits")
-    .min(3, "Number must be at least 3 digits")
-    .max(15, "Number must be at most 15 digits"),
-});
-
-// const ContactForm = ({ onAddContact }) => {
-//   const initialValues = {
-//     name: "",
-//     number: "",
-//   };
-
-//   const handleSubmit = (values, actions) => {
-//     const newContact = { ...values, id: nanoid() };
-//     console.log(newContact);
-//     onAddContact(newContact);
-//     actions.resetForm();
-//   };
-
+const ContactForm = () => {
+  const dispatch = useDispatch();
+  const initialValues = {
+    name: "",
+    number: "",
+  };
+  const onSubmit = (values, { resetForm }) => {
+    const newContact = {
+      id: nanoid(),
+      name: values.name,
+      number: values.number,
+    };
+    dispatch(addContact(newContact));
+    resetForm();
+    console.log("Contact added:", newContact);
+  };
   return (
     <div className={s.wrapper}>
-      <Formik
-        validationSchema={registerSchema}
-        initialValues={initialValues}
-        onSubmit={handleSubmit}
-      >
+      <Formik initialValues={initialValues} onSubmit={onSubmit}>
         <Form className={s.form}>
           <label className={s.label}>
             <span>Name:</span>
